@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню ресторана</title>
+    <style>* {font-family: sans-serif} span {margin-right: 100px}</style>
+</head>
+<body>
+
+<h1>Меню ресторана</h1>
+<form action="total" method="POST">
+    {% csrf_token %}
+
+    {% for category, dishes_list in dishes.items %}
+        <h3>{{ category }}</h3>
+        {% for dish in dishes_list %}
+            <label>
+                <img src="{{ dish.picture }}" alt="Нет изображения" width="150">
+                <span><input type="checkbox" name="{{ dish.dish_id }}">{{ dish.title }}</span>
+                <span><i>Пищевая ценность: {{ dish.nutritional_value }} ккал / г</i></span>
+                <span><i>Цена: {{ dish.price }} ₽</i></span>
+                <span><i>Аллергены: {{ dish.allergens }}</i></span>
+            </label><br>
+        {% empty %}
+            <p>Нет добавленных блюд</p>
+        {% endfor %}
+    {% empty %}
+        <h3>Нет категорий</h3>
+    {% endfor %}
+
+    <input type="submit">
+</form>
+
+</body>
+</html>

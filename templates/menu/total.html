@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Итого</title>
+    <style>* {font-family: sans-serif}</style>
+    {% load static %}
+</head>
+<body>
+
+<h1>Итого</h1>
+
+<p><b>Сумма заказа:</b> {{ total_sum }} ₽</p>
+<b>Блюда:</b>
+<ol>
+    {% for dish in dishes %}
+        <li>{{ dish }}</li>
+    {% empty %}
+        <p>Нет блюд</p>
+    {% endfor %}
+</ol>
+
+<b>Аллергены:</b>
+<ol>
+    {% for allergen in allergens %}
+        <li>{{ allergen }}</li>
+    {% empty %}
+    <p>В выбранных блюдах нет аллергенов</p>
+    {% endfor %}
+</ol>
+</body>
+</html>
